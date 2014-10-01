@@ -74,13 +74,19 @@
 		blockDuration = [defaults integerForKey:@"BlockDuration"] * 60;
 	}
 
+    // SERVER_TIME
+    NSDate *serverDate = [NSDate serverDate];
+    NSLog(@"serverDate: %@", serverDate);
+
 	// It is KEY to retain the block ending date , if you forget to retain it
 	// you'll end up with a nasty program crash.
 	if(blockDuration)
 		blockEndingDate_ = [beginDate dateByAddingTimeInterval: blockDuration];
 	else
 		// If the block duration is 0, the ending date is... now!
-		blockEndingDate_ = [NSDate date];
+		//blockEndingDate_ = [NSDate date];
+        // SERVER_TIME
+		blockEndingDate_ = serverDate;
 
 	[self updateTimerDisplay: nil];
 

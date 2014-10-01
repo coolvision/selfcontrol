@@ -860,7 +860,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5327353319F8476F0063193F /* NSDate+ServerDate.m in Sources */,
 				CBD2676C11ED926300042CD8 /* LaunchctlHelper.m in Sources */,
 				CBD266B111ED7D9C00042CD8 /* HelperCommon.m in Sources */,
 				CB73616119E5086900E0924F /* WhitelistScraper.m in Sources */,
@@ -869,6 +868,7 @@
 				CB25806316C1FDBE0059C99A /* BlockManager.m in Sources */,
 				CBCA91131960FF0100AFD20C /* PacketFilter.m in Sources */,
 				CB25806816C237F10059C99A /* NSString+IPAddress.m in Sources */,
+				5327353319F8476F0063193F /* NSDate+ServerDate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -900,7 +900,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5327353419F8476F0063193F /* NSDate+ServerDate.m in Sources */,
 				CBA2AFD90F39EC46005AFEBE /* HelperMain.m in Sources */,
 				CBCA91121960D87300AFD20C /* PacketFilter.m in Sources */,
 				CB73616219E5086A00E0924F /* WhitelistScraper.m in Sources */,
@@ -909,6 +908,7 @@
 				CBD266B011ED7D9C00042CD8 /* HelperCommon.m in Sources */,
 				CB25806216C1FDBE0059C99A /* BlockManager.m in Sources */,
 				CB25806716C237F10059C99A /* NSString+IPAddress.m in Sources */,
+				5327353419F8476F0063193F /* NSDate+ServerDate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
