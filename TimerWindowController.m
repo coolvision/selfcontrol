@@ -21,8 +21,9 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-
 #import "TimerWindowController.h"
+
+#import "NSDate+ServerDate.h"
 
 @implementation TimerWindowController
 
@@ -81,7 +82,7 @@
 
 	[self updateTimerDisplay: nil];
 
-	timerUpdater_ = [NSTimer timerWithTimeInterval: 1.0
+	timerUpdater_ = [NSTimer timerWithTimeInterval: 2.0
 											target: self
 										  selector: @selector(updateTimerDisplay:)
 										  userInfo: nil
@@ -125,8 +126,19 @@
 	int numHours;
 	int numMinutes;
 
-	if(numSeconds < 0) {
-		[[NSApp dockTile] setBadgeLabel: nil];
+    NSLog(@"numSeconds: %d", numSeconds);
+
+    NSDate *now = [NSDate date];
+    NSLog(@"date: %@" , now);
+    NSDate *serverDate = [NSDate serverDate];
+    NSLog(@"serverDate: %@" , serverDate);
+
+    int numSeconds_check = (int) [blockEndingDate_ timeIntervalSinceDate: serverDate];
+    NSLog(@"numSeconds_check: %d", numSeconds_check);
+
+    //if(numSeconds < 0) {
+	if(numSeconds_check < 0) {
+        [[NSApp dockTile] setBadgeLabel: nil];
 
 		// This increments the strike counter.  After four strikes of the timer being
 		// at or less than 0 seconds, SelfControl will assume something's wrong and run

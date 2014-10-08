@@ -22,6 +22,8 @@
 
 #import "HelperMain.h"
 
+#import "NSDate+ServerDate.h"
+
 int main(int argc, char* argv[]) {
 	@autoreleasepool {
 
@@ -324,7 +326,18 @@ int main(int argc, char* argv[]) {
 			// convert to seconds
 			blockDuration *= 60;
 
-			NSTimeInterval timeSinceStarted = [[NSDate date] timeIntervalSinceDate: blockStartedDate];
+            NSLog(@"HelperMain time check");
+            NSDate *now = [NSDate date];
+            NSLog(@"date: %@" , now);
+
+            NSDate *serverDate = [NSDate serverDate];
+            NSLog(@"serverDate: %@" , serverDate);
+
+            NSTimeInterval timeSinceStarted = [serverDate timeIntervalSinceDate: blockStartedDate];
+
+            NSLog(@"timeSinceStarted: %f" , timeSinceStarted);
+
+			//NSTimeInterval timeSinceStarted = [[NSDate date] timeIntervalSinceDate: blockStartedDate];
 
 			// Note there are a few extra possible conditions on this if statement, this
 			// makes it more likely that an improperly applied block might come right
