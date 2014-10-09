@@ -86,8 +86,14 @@ int main(int argc, char* argv[]) {
 
 			// get the expiration minute, to make sure we run the helper then (if it hasn't run already)
 			NSTimeInterval blockDuration = [defaults[@"BlockDuration"] intValue];
-			NSDate* expirationDate = [[NSDate date] dateByAddingTimeInterval: (blockDuration *60)];
-			NSCalendar* calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+
+            // SERVER_TIME
+            NSDate *serverDate = [NSDate serverDate];
+            NSLog(@"serverDate: %@", serverDate);
+            NSDate* expirationDate = [serverDate dateByAddingTimeInterval: (blockDuration *60)];
+            //NSDate* expirationDate = [[NSDate date] dateByAddingTimeInterval: (blockDuration *60)];
+
+            NSCalendar* calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
 			NSDateComponents* components = [calendar components: NSMinuteCalendarUnit fromDate: expirationDate];
 			int expirationMinute = [components minute];
 
@@ -326,18 +332,17 @@ int main(int argc, char* argv[]) {
 			// convert to seconds
 			blockDuration *= 60;
 
+            // SERVER_TIME
             NSLog(@"HelperMain time check");
             NSDate *now = [NSDate date];
             NSLog(@"date: %@" , now);
-
             NSDate *serverDate = [NSDate serverDate];
-            NSLog(@"serverDate: %@" , serverDate);
+            NSLog(@"serverDate: %@", serverDate);
 
             NSTimeInterval timeSinceStarted = [serverDate timeIntervalSinceDate: blockStartedDate];
+            //NSTimeInterval timeSinceStarted = [[NSDate date] timeIntervalSinceDate: blockStartedDate];
 
             NSLog(@"timeSinceStarted: %f" , timeSinceStarted);
-
-			//NSTimeInterval timeSinceStarted = [[NSDate date] timeIntervalSinceDate: blockStartedDate];
 
 			// Note there are a few extra possible conditions on this if statement, this
 			// makes it more likely that an improperly applied block might come right

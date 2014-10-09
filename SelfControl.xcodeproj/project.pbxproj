@@ -24,6 +24,8 @@
 /* Begin PBXBuildFile section */
 		5327353219F8476F0063193F /* NSDate+ServerDate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5327353119F8476F0063193F /* NSDate+ServerDate.m */; };
 		5327353319F8476F0063193F /* NSDate+ServerDate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5327353119F8476F0063193F /* NSDate+ServerDate.m */; };
+		5327353419F8476F0063193F /* NSDate+ServerDate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5327353119F8476F0063193F /* NSDate+ServerDate.m */; };
+		5327353A19F8476F0063193F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5327353919F8476F0063193F /* Images.xcassets */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 		CB0385E119D77051004614B6 /* PreferencesAdvancedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB0385DD19D77051004614B6 /* PreferencesAdvancedViewController.xib */; };
@@ -196,6 +198,7 @@
 		32CA4F630368D1EE00C91783 /* SelfControl_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelfControl_Prefix.pch; sourceTree = "<group>"; };
 		5327353019F8476F0063193F /* NSDate+ServerDate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDate+ServerDate.h"; path = "NSDate-ServerDate/NSDate+ServerDate.h"; sourceTree = "<group>"; };
 		5327353119F8476F0063193F /* NSDate+ServerDate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDate+ServerDate.m"; path = "NSDate-ServerDate/NSDate+ServerDate.m"; sourceTree = "<group>"; };
+		5327353919F8476F0063193F /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = "SelfControl Killer/Images.xcassets"; sourceTree = "<group>"; };
 		5B5B7518CBBC52BDF91BA731 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		5BF4C56EF9E741B8994020A7 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		640D40C816D6E962003034B3 /* it */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = it; path = it.lproj/DomainList.xib; sourceTree = "<group>"; };
@@ -461,6 +464,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				5327353919F8476F0063193F /* Images.xcassets */,
 				CBBF4E8C1582F8E000E364D9 /* Localizable.strings */,
 				CB40A8670FBC7DE700167727 /* SelfControlBlocklist.icns */,
 				CB9366E60F85BEF100EF284E /* NSRemoveTemplate.jpg */,
@@ -765,6 +769,7 @@
 				CB1E7A6E0F9AEA9B00D158BC /* ERRORS in Resources */,
 				CB40A8680FBC7DE700167727 /* SelfControlBlocklist.icns in Resources */,
 				CBBF4E7F1582F7A200E364D9 /* DomainList.xib in Resources */,
+				5327353A19F8476F0063193F /* Images.xcassets in Resources */,
 				CBBF4E801582F7A200E364D9 /* MainMenu.xib in Resources */,
 				CBBF4E8B1582F8BD00E364D9 /* InfoPlist.strings in Resources */,
 				CB249FED19D782230087BBB6 /* SelfControlIcon.icns in Resources */,
@@ -855,7 +860,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5327353319F8476F0063193F /* NSDate+ServerDate.m in Sources */,
 				CBD2676C11ED926300042CD8 /* LaunchctlHelper.m in Sources */,
 				CBD266B111ED7D9C00042CD8 /* HelperCommon.m in Sources */,
 				CB73616119E5086900E0924F /* WhitelistScraper.m in Sources */,
@@ -864,6 +868,7 @@
 				CB25806316C1FDBE0059C99A /* BlockManager.m in Sources */,
 				CBCA91131960FF0100AFD20C /* PacketFilter.m in Sources */,
 				CB25806816C237F10059C99A /* NSString+IPAddress.m in Sources */,
+				5327353319F8476F0063193F /* NSDate+ServerDate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -903,6 +908,7 @@
 				CBD266B011ED7D9C00042CD8 /* HelperCommon.m in Sources */,
 				CB25806216C1FDBE0059C99A /* BlockManager.m in Sources */,
 				CB25806716C237F10059C99A /* NSString+IPAddress.m in Sources */,
+				5327353419F8476F0063193F /* NSDate+ServerDate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1070,6 +1076,7 @@
 			baseConfigurationReference = 8FF1D6628B2B68AE4E0ABE25 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
@@ -1095,6 +1102,7 @@
 			baseConfigurationReference = 5B5B7518CBBC52BDF91BA731 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";

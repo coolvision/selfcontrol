@@ -34,6 +34,8 @@
 		addToBlockLock = [[NSLock alloc] init];
 
 		numStrikes = 0;
+
+        timerIteration = 0;
 	}
 
 	return self;
@@ -72,17 +74,23 @@
 		blockDuration = [defaults integerForKey:@"BlockDuration"] * 60;
 	}
 
+    // SERVER_TIME
+    NSDate *serverDate = [NSDate serverDate];
+    NSLog(@"serverDate: %@", serverDate);
+
 	// It is KEY to retain the block ending date , if you forget to retain it
 	// you'll end up with a nasty program crash.
 	if(blockDuration)
 		blockEndingDate_ = [beginDate dateByAddingTimeInterval: blockDuration];
 	else
 		// If the block duration is 0, the ending date is... now!
-		blockEndingDate_ = [NSDate date];
+		//blockEndingDate_ = [NSDate date];
+        // SERVER_TIME
+		blockEndingDate_ = serverDate;
 
 	[self updateTimerDisplay: nil];
 
-	timerUpdater_ = [NSTimer timerWithTimeInterval: 2.0
+	timerUpdater_ = [NSTimer timerWithTimeInterval: 1.0
 											target: self
 										  selector: @selector(updateTimerDisplay:)
 										  userInfo: nil
@@ -126,37 +134,47 @@
 	int numHours;
 	int numMinutes;
 
-    NSLog(@"numSeconds: %d", numSeconds);
-
     NSDate *now = [NSDate date];
     NSLog(@"date: %@" , now);
-    NSDate *serverDate = [NSDate serverDate];
-    NSLog(@"serverDate: %@" , serverDate);
+    NSLog(@"ending date: %@" , blockEndingDate_);
+    NSLog(@"numSeconds: %d", numSeconds);
 
-    int numSeconds_check = (int) [blockEndingDate_ timeIntervalSinceDate: serverDate];
-    NSLog(@"numSeconds_check: %d", numSeconds_check);
+    timerIteration++;
 
-    //if(numSeconds < 0) {
-	if(numSeconds_check < 0) {
-        [[NSApp dockTile] setBadgeLabel: nil];
+    // SERVER_TIME
+    if (timerIteration % 10 == 0) {
 
-		// This increments the strike counter.  After four strikes of the timer being
-		// at or less than 0 seconds, SelfControl will assume something's wrong and run
-		// scheckup.
-		numStrikes++;
+        NSDate *serverDate = [NSDate serverDate];
+        NSLog(@"serverDate: %@" , serverDate);
 
-		if(numStrikes == 2) {
-			NSLog(@"WARNING: Block should have ended two seconds ago, starting scheckup");
-			[self runCheckup];
-		} else if(numStrikes > 10) {
-			// OK, so apparently scheckup couldn't remove the block either. Enable manual block removal.
-			if (numStrikes == 10) NSLog(@"WARNING: Block should have ended a minute ago! Probable permablock.");
-			addToBlockButton_.hidden = YES;
-			killBlockButton_.hidden = NO;
-		}
+        int numSeconds_check = (int) [blockEndingDate_ timeIntervalSinceDate: serverDate];
+        NSLog(@"numSeconds_check: %d", numSeconds_check);
 
-		return;
-	}
+        //if(numSeconds < 0) {
+        if(numSeconds_check < 0) {
+            [[NSApp dockTile] setBadgeLabel: nil];
+
+            // This increments the strike counter.  After four strikes of the timer being
+            // at or less than 0 seconds, SelfControl will assume something's wrong and run
+            // scheckup.
+            numStrikes++;
+
+            NSLog(@"numStrikes: %d" , numStrikes);
+
+            if(numStrikes == 2) {
+                NSLog(@"WARNING: Block should have ended two seconds ago, starting scheckup");
+                [self runCheckup];
+            } else if(numStrikes > 10) {
+                // OK, so apparently scheckup couldn't remove the block either. Enable manual block removal.
+                if (numStrikes == 10) NSLog(@"WARNING: Block should have ended a minute ago! Probable permablock.");
+                addToBlockButton_.hidden = YES;
+                killBlockButton_.hidden = NO;
+            }
+
+            return;
+        }
+        [self resetStrikes];
+    }
 
 	numHours = (numSeconds / 3600);
 	numSeconds %= 3600;
@@ -175,7 +193,6 @@
 	 ];
 
 	[timerLabel_ sizeToFit];
-	[self resetStrikes];
 
 	if([[NSUserDefaults standardUserDefaults] boolForKey: @"BadgeApplicationIcon"]) {
 		// We want to round up the minutes--standard when we aren't displaying seconds.

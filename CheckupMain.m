@@ -47,19 +47,20 @@ int main(int argc, char* argv[]) {
 		// convert to seconds
 		blockDuration *= 60;
 
+        // SERVER_TIME
         NSLog(@"CheckupMain time check");
         NSDate *now = [NSDate date];
         NSLog(@"date: %@" , now);
+        NSLog(@"blockStartedDate: %@", blockStartedDate);
 
-        //NSDate *serverDate = [NSDate date];
+
         NSDate *serverDate = [NSDate serverDate];
         NSLog(@"serverDate: %@" , serverDate);
 
         NSTimeInterval timeSinceStarted = [serverDate timeIntervalSinceDate: blockStartedDate];
+        //NSTimeInterval timeSinceStarted = [[NSDate date] timeIntervalSinceDate: blockStartedDate];
 
         NSLog(@"timeSinceStarted: %f" , timeSinceStarted);
-
-		//NSTimeInterval timeSinceStarted = [[NSDate date] timeIntervalSinceDate: blockStartedDate];
 
 		if( blockStartedDate == nil || blockDuration < 1 || [[NSDate distantFuture] isEqualToDate: blockStartedDate] || timeSinceStarted >= blockDuration) {
 			NSLog(@"INFO: Checkup helper ran, block expired, removing block.");
