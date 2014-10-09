@@ -330,8 +330,9 @@ int main(int argc, char* argv[]) {
             NSDate *now = [NSDate date];
             NSLog(@"date: %@" , now);
 
+            // SERVER_TIME
             NSDate *serverDate = [NSDate serverDate];
-            NSLog(@"serverDate: %@" , serverDate);
+            NSLog(@"serverDate: %@", serverDate);
 
             NSTimeInterval timeSinceStarted = [serverDate timeIntervalSinceDate: blockStartedDate];
 
