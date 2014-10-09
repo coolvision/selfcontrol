@@ -1,3 +1,20 @@
+This is a vesion of SelfControl wich checks time independently of the system time (time_check branch).
+
+Each 10 seconds time is queried with http request to http://google.com/ (using code from https://github.com/freak4pc/NSDate-ServerDate)
+
+It solves the issue of unblocking by system time change (https://github.com/SelfControlApp/selfcontrol/issues/28)
+
+Use at your own risk, it might cause permanent blocking!
+
+I'm currently using (testing) it.
+There are a few issues:
+- obviously, google.com should not be blocked (not in the block list, or in the white list), there is no check for that now
+- if there is no internet access, blocking will not start (no warnings shown)
+- and will not stop (but will stop if internet acces appears and blocking time has expired)
+- when the system time is ahead of checked time, negative time value can be displayed (I think it's good because it prompts you to stop meddling with the time settings :)
+
+-----
+
 [SelfControl](http://selfcontrolapp.com)
 ===========
 
