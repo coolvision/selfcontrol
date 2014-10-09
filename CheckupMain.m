@@ -47,11 +47,13 @@ int main(int argc, char* argv[]) {
 		// convert to seconds
 		blockDuration *= 60;
 
+        // SERVER_TIME
         NSLog(@"CheckupMain time check");
         NSDate *now = [NSDate date];
         NSLog(@"date: %@" , now);
+        NSLog(@"blockStartedDate: %@", blockStartedDate);
 
-        //NSDate *serverDate = [NSDate date];
+
         NSDate *serverDate = [NSDate serverDate];
         NSLog(@"serverDate: %@" , serverDate);
 

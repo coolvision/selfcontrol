@@ -128,15 +128,14 @@
 	int numHours;
 	int numMinutes;
 
-
-    NSLog(@"numSeconds: %d", numSeconds);
-
     NSDate *now = [NSDate date];
     NSLog(@"date: %@" , now);
-
+    NSLog(@"ending date: %@" , blockEndingDate_);
+    NSLog(@"numSeconds: %d", numSeconds);
 
     timerIteration++;
 
+    // SERVER_TIME
     if (timerIteration % 10 == 0) {
 
         NSDate *serverDate = [NSDate serverDate];

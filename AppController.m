@@ -25,6 +25,8 @@
 #import "PreferencesGeneralViewController.h"
 #import "PreferencesAdvancedViewController.h"
 
+#import "NSDate+ServerDate.h"
+
 NSString* const kSelfControlErrorDomain = @"SelfControlErrorDomain";
 
 @implementation AppController
@@ -569,8 +571,23 @@ NSString* const kSelfControlErrorDomain = @"SelfControlErrorDomain";
 			return;
 		}
 
-		[defaults_ setObject: [NSDate date] forKey: @"BlockStartedDate"];
-		[defaults_ synchronize];
+        // SERVER_TIME
+        // get the date from the server
+        NSDate *serverDate = [NSDate serverDate];
+        double time = [serverDate timeIntervalSince1970];
+        NSLog(@"got serverDate: %@" , serverDate);
+        NSLog(@"got time: %f" , time);
+        if (time < 1) {
+            NSLog(@"ERROR: Failed to get time value from server.");
+            self.addingBlock = false;
+            [self refreshUserInterface];
+            return;
+        }
+
+//		[defaults_ setObject: [NSDate date] forKey: @"BlockStartedDate"];
+		[defaults_ setObject: serverDate forKey: @"BlockStartedDate"];
+
+        [defaults_ synchronize];
 
 		// We need to pass our UID to the helper tool.  It needs to know whose defaults
 		// it should reading in order to properly load the blacklist.
