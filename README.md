@@ -8,9 +8,9 @@ Use at your own risk, it might cause permanent blocking!
 
 I'm currently using (testing) it. There are a few issues:
 
-if there is no internet access, blocking will not start (no warnings shown)
-and will not stop (but will stop if internet acces appears and blocking time has expired)
-when the system time is ahead of checked time, negative time value can be displayed (I think it's good because it prompts you to stop meddling with the time settings :)
+- if there is no internet access, blocking will not start (no warnings shown)
+- and will not stop (but will stop if internet acces appears and blocking time has expired)
+- when the system time is ahead of checked time, negative time value can be displayed (I think it's good because it prompts you to stop meddling with the time settings :)
 
 [SelfControl](http://selfcontrolapp.com)
 ===========
