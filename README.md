@@ -8,7 +8,7 @@ Use at your own risk, it might cause permanent blocking!
 
 I'm currently using (testing) it.
 There are a few issues:
-- obviously, google.com should not be blocked (not in the block list, or in the white list)
+- obviously, google.com should not be blocked (not in the block list, or in the white list), there is no check for that now
 - if there is no internet access, blocking will not start (no warnings shown)
 - and will not stop (but will stop if internet acces appears and blocking time has expired)
 - when the system time is ahead of checked time, negative time value can be displayed (I think it's good because it prompts you to stop meddling with the time settings :)
