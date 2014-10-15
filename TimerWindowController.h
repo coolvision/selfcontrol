@@ -33,6 +33,7 @@
 	NSDate* blockEndingDate_;
 	NSLock* addToBlockLock;
 	int numStrikes;
+    int timerIteration;
 	IBOutlet NSButton* addToBlockButton_;
 	IBOutlet NSButton* killBlockButton_;
 	IBOutlet NSPanel* addSheet_;

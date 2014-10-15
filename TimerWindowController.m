@@ -34,6 +34,8 @@
 		addToBlockLock = [[NSLock alloc] init];
 
 		numStrikes = 0;
+
+        timerIteration = 0;
 	}
 
 	return self;
@@ -82,7 +84,7 @@
 
 	[self updateTimerDisplay: nil];
 
-	timerUpdater_ = [NSTimer timerWithTimeInterval: 2.0
+	timerUpdater_ = [NSTimer timerWithTimeInterval: 1.0
 											target: self
 										  selector: @selector(updateTimerDisplay:)
 										  userInfo: nil
@@ -126,37 +128,48 @@
 	int numHours;
 	int numMinutes;
 
+
     NSLog(@"numSeconds: %d", numSeconds);
 
     NSDate *now = [NSDate date];
     NSLog(@"date: %@" , now);
-    NSDate *serverDate = [NSDate serverDate];
-    NSLog(@"serverDate: %@" , serverDate);
 
-    int numSeconds_check = (int) [blockEndingDate_ timeIntervalSinceDate: serverDate];
-    NSLog(@"numSeconds_check: %d", numSeconds_check);
 
-    //if(numSeconds < 0) {
-	if(numSeconds_check < 0) {
-        [[NSApp dockTile] setBadgeLabel: nil];
+    timerIteration++;
 
-		// This increments the strike counter.  After four strikes of the timer being
-		// at or less than 0 seconds, SelfControl will assume something's wrong and run
-		// scheckup.
-		numStrikes++;
+    if (timerIteration % 10 == 0) {
 
-		if(numStrikes == 2) {
-			NSLog(@"WARNING: Block should have ended two seconds ago, starting scheckup");
-			[self runCheckup];
-		} else if(numStrikes > 10) {
-			// OK, so apparently scheckup couldn't remove the block either. Enable manual block removal.
-			if (numStrikes == 10) NSLog(@"WARNING: Block should have ended a minute ago! Probable permablock.");
-			addToBlockButton_.hidden = YES;
-			killBlockButton_.hidden = NO;
-		}
+        NSDate *serverDate = [NSDate serverDate];
+        NSLog(@"serverDate: %@" , serverDate);
 
-		return;
-	}
+        int numSeconds_check = (int) [blockEndingDate_ timeIntervalSinceDate: serverDate];
+        NSLog(@"numSeconds_check: %d", numSeconds_check);
+
+        //if(numSeconds < 0) {
+        if(numSeconds_check < 0) {
+            [[NSApp dockTile] setBadgeLabel: nil];
+
+            // This increments the strike counter.  After four strikes of the timer being
+            // at or less than 0 seconds, SelfControl will assume something's wrong and run
+            // scheckup.
+            numStrikes++;
+
+            NSLog(@"numStrikes: %d" , numStrikes);
+
+            if(numStrikes == 2) {
+                NSLog(@"WARNING: Block should have ended two seconds ago, starting scheckup");
+                [self runCheckup];
+            } else if(numStrikes > 10) {
+                // OK, so apparently scheckup couldn't remove the block either. Enable manual block removal.
+                if (numStrikes == 10) NSLog(@"WARNING: Block should have ended a minute ago! Probable permablock.");
+                addToBlockButton_.hidden = YES;
+                killBlockButton_.hidden = NO;
+            }
+
+            return;
+        }
+        [self resetStrikes];
+    }
 
 	numHours = (numSeconds / 3600);
 	numSeconds %= 3600;
@@ -175,7 +188,6 @@
 	 ];
 
 	[timerLabel_ sizeToFit];
-	[self resetStrikes];
 
 	if([[NSUserDefaults standardUserDefaults] boolForKey: @"BadgeApplicationIcon"]) {
 		// We want to round up the minutes--standard when we aren't displaying seconds.
