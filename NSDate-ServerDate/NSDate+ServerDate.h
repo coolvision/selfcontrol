@@ -7,7 +7,7 @@
 
 #import <Foundation/Foundation.h>
 
-#define _SD_SERVER @"http://google.com/"
+#define _SD_SERVER @"http://time.apple.com/"
 #define _SD_FORMAT @"EEE, dd MMM yyyy HH:mm:ss z"
 
 /**
